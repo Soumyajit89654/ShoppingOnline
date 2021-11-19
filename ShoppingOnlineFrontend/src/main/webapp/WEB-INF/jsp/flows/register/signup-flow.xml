@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/webflow
+                          http://www.springframework.org/schema/webflow/spring-webflow.xsd">
+    
+    
+      <var name="user" class="com.project.ShoppingOnlineBackend.model.User" />
+      <var name="billing" class="com.project.ShoppingOnlineBackend.model.Address" />
+      
+      
+      <on-start>
+		<evaluate expression="registerHandler.init()" result="flowScope.registerModel" />
+	</on-start>
+      
+      
+      
+    <!-- Flow Start State -->
+	<view-state id="id_personal" view="flows/register/signup-personal" model="user">
+	   <transition on="billing" to="validate" />
+	   <on-exit>
+			<evaluate expression="registerHandler.addUser(flowScope.registerModel , user)" />
+		</on-exit>
+	</view-state>
+    
+  <action-state id="validate">
+		<evaluate expression="registerHandler.validate(user,messageContext)" />
+		<transition on="success" to="id_address" />
+		<transition on="failure" to="id_personal" />
+	</action-state>
+    
+    <view-state id="id_address" view="flows/register/signup-address" model="billing">
+      <transition on="personal" to="id_personal"/>
+      <transition on="confirm" to="id_confirm"/>
+    </view-state>      
+    
+  <view-state id="id_confirm" view="flows/register/signup-confirm">
+  <transition on="personal" to="id_personal" />
+	<transition on="billing" to="id_address" />
+	<transition on="success" to="id_success" />
+  </view-state>  
+  
+  
+	<view-state id="id_success" view="flows/register/signup-success" >
+	</view-state>	      
+</flow>                          
