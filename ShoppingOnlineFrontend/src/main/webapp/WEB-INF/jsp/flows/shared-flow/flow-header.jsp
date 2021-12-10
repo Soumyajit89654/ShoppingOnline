@@ -29,3 +29,17 @@
 <link rel="stylesheet" href="${css}/jquery.dataTables.css">
 </head>
 <body>
+<%@include file="../../shared/navbar.jsp"%>
+
+<div class="wrapper">
+
+		<!-- Navigation -->
+
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" role="navigation">
+			<div class="container">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="${flowExecutionUrl}&_eventId_home">HOME</a>
+				</div>
+			</div>
+		</nav>
+		<br/>

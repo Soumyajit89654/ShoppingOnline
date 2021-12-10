@@ -30,17 +30,30 @@
 	</action-state>
     
     <view-state id="id_address" view="flows/register/signup-address" model="billing">
-      <transition on="personal" to="id_personal"/>
+      <transition on="personal" to="id_personal" validate="false"/>
       <transition on="confirm" to="id_confirm"/>
+      <on-exit>
+			<evaluate expression="registerHandler.addAddress(flowScope.registerModel , billing)" />
+	</on-exit>
     </view-state>      
     
-  <view-state id="id_confirm" view="flows/register/signup-confirm">
+  <view-state id="id_confirm" view="flows/register/signup-confirm" model="flowScope.registerModel">
   <transition on="personal" to="id_personal" />
 	<transition on="billing" to="id_address" />
 	<transition on="success" to="id_success" />
+	<on-exit>
+			<evaluate expression="registerHandler.saveAll(flowScope.registerModel)" />
+		</on-exit>
   </view-state>  
   
   
-	<view-state id="id_success" view="flows/register/signup-success" >
-	</view-state>	      
+		
+	<!-- end state -->
+	<end-state id="home_id" view="externalRedirect:contextRelative:/" />
+	<end-state id="id_success" view="flows/register/signup-success" />
+	
+	<!-- global transition -->
+	<global-transitions>
+		<transition on="home" to="home_id" validate="false" />
+	</global-transitions>    
 </flow>                          

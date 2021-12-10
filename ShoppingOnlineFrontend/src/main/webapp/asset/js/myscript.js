@@ -24,12 +24,14 @@ $(function(){
 			 	columns : [ 
 				         { 
 					       data : 'code',
+							data2 : 'id',
                      	bSortable : false,
                          mRender : function(data, type, row) {
 
 								return '<img src="' + window.contextRoot
-										+ '/rs/images/' + data
-										+ '.jpg" class="dataTableImg"/>';
+												+ '/rs/images/' + data
+												+ '.jpg" class="dataTableImg"/>';
+										
 
 							}
                          },
@@ -46,28 +48,53 @@ $(function(){
                                   }
 				         },
                          {
-	                       data : 'quantity'
+	                       data : 'quantity',
+                               mRender : function(data, type, row) {
+
+									if (data < 1) {
+										return '<span style="color:red">Out of Stock!</span>';
+									}
+
+									return data;
+
+								}
                          },
                          {
-	                      data :'id',
+	                      	data :'id',
                         
-                        bSortable : false,
+                        	bSortable : false,
                       
-                        mRender : function(data, type, row) {
+                        	mRender : function(data, type, row) {
 
-			     var str = '';
-					str += '<a href="'
-						+ window.contextRoot
-						+ '/product/show/'
-						+ data
-						+ '/product" class="btn btn-primary"><span class="glyphicon glyphicon-eye-open"></span></a> &#160;';
+			     				var str = '';
+								str += '<a href="'
+								+ window.contextRoot
+								+ '/product/show/'
+								+ data
+								+ '/product" class="btn btn-primary"><span class="glyphicon glyphicon-eye-open"></span></a> &#160;';
+                                
+                               if (! row.role == 'ADMIN' )
+                                {
+                                   if (row.quantity < 1) 
+                                       {
+											str += '<a href="javascript:void(0)" class="btn btn-warning disabled"><span class="glyphicon glyphicon-shopping-cart"></span></a>';
+										} 
+										else 
+										{
+											str += '<a href="#" class="btn btn-warning"><span class="glyphicon glyphicon-shopping-cart"></span></a>';
+										}					
+                                  }
+                                    else
+                                     {
+	                                   str += '<a href="'
+											+ window.contextRoot
+											+ '/manage/'
+											+ data
+											+ '/product" class="btn btn-warning"><span class="glyphicon glyphicon-pencil"></span></a> ';
+                                       }
+								return str;
 
-					str += '<a href="#" class="btn btn-warning"><span class="glyphicon glyphicon-shopping-cart"></span></a>';
-					
-
-					return str;
-
-				}
+							}
                          }
 			           ] 
 			     });

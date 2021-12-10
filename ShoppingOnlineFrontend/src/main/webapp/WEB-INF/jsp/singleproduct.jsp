@@ -25,6 +25,7 @@
 <link rel="stylesheet" href="${css}/breadcrumb.css">
 <!-- sidebar css -->
 <link rel="stylesheet" href="${css}/sidebar.css">
+  <link rel="stylesheet" href="${css}/dropdown.css">
 
 
 <!-- datable  bootstrap css -->
@@ -47,6 +48,14 @@
    	
      <c:if test="${userclickaboutus==true}">
    		 <%@include file="aboutus.jsp" %>
+   	</c:if>
+   	
+   	 <c:if test="${userclicklogin==true}">
+   		 <%@include file="login.jsp" %>
+   	</c:if>
+   	
+   	<c:if test="${userclickshowcart==true}">
+   		 <%@include file="cart.jsp" %>
    	</c:if>
    	
    	

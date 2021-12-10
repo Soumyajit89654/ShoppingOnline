@@ -25,6 +25,7 @@
 <link rel="stylesheet" href="${css}/breadcrumb.css">
 <!-- sidebar css -->
 <link rel="stylesheet" href="${css}/sidebar.css">
+  <link rel="stylesheet" href="${css}/dropdown.css">
 
 
 <!-- datable  bootstrap css -->
