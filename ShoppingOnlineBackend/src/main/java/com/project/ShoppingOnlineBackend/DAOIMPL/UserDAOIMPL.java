@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.project.ShoppingOnlineBackend.DAO.UserDAO;
 import com.project.ShoppingOnlineBackend.model.Address;
+import com.project.ShoppingOnlineBackend.model.Cart;
 import com.project.ShoppingOnlineBackend.model.User;
 
 @Repository("userDAO")
@@ -62,6 +63,19 @@ public class UserDAOIMPL implements UserDAO {
 			e.printStackTrace();
 			return false;
 		}
+	}
+
+	public boolean updateCart(Cart cart) {
+		try 
+		{			
+			sessionFactory.getCurrentSession().update(cart);
+			return true;
+		}
+		catch(Exception ex) 
+		{		
+			ex.printStackTrace();
+			return false;	
+		}		
 	}
 
 }
