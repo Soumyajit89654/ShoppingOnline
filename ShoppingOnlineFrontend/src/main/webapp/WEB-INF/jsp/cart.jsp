@@ -2,7 +2,7 @@
 	href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css"
 	rel="stylesheet">
 <div class="container">
-   <c:if test="${not empty message}">
+	<c:if test="${not empty message}">
 		<div class="alert alert-info alert-dismissible " role="alert">
 			${message}
 			<button type="button" class="close" data-dismiss="alert"
@@ -11,7 +11,9 @@
 			</button>
 		</div>
 	</c:if>
-	
+
+	<c:choose>
+		<c:when test="${not empty cartLines}">
 			<table id="cart" class="table table-hover table-condensed">
 				<thead>
 					<tr>
@@ -22,41 +24,44 @@
 						<th style="width: 10%"></th>
 					</tr>
 				</thead>
-				
+
 				<tbody>
+					<c:forEach items="${cartLines}" var="cartLine">
 						<tr>
 							<td data-th="Product">
 								<div class="row">
 									<div class="col-sm-2 hidden-xs">
-										<img src="#" alt="ProductName" class="img-responsive" />
+										<img src="${images}/${cartLine.product.code}.jpg"
+											alt="${cartLine.product.name}" class="img-responsive" />
 									</div>
 									<div class="col-sm-10">
-										<h4 class="nomargin">Product Name</h4>
-										<p>Brand : Brand Name</p>
-										<p>Description :Sample Description
+										<h4 class="nomargin">${cartLine.product.name}</h4>
+										<p>Brand : ${cartLine.product.brand}</p>
+										<p>Description :${cartLine.product.description}
 									</div>
 								</div>
 							</td>
-							
-							<td data-th="Price">&#8377; 1234 /-</td>
-							  <td data-th="Quantity"><input type="number"
-								 class="form-control text-center"
-								 max="5" min="1" ></td>
-							<td data-th="Subtotal" class="text-center">&#8377; 4500 /-</td>
+
+							<td data-th="Price">&#8377; ${cartLine.buyingPrice} /-</td>
+							<td data-th="Quantity"><input type="number"
+								id="count_${cartLine.id}" value="${cartLine.productCount}"
+								class="form-control text-center" max="5" min="1"></td>
+							<td data-th="Subtotal" class="text-center">&#8377;
+								${cartLine.total} /-</td>
 							<td class="actions" data-th="">
 								<button type="button" name="refreshCart"
-									class="btn btn-info btn-sm" >
+									class="btn btn-info btn-sm" value="${cartLine.id}">
 									<i class="fa fa-refresh"></i>
-								</button> 
-								<a href="#"class="btn btn-danger btn-sm"> 
-								<i class="fa fa-trash-o"></i>
-							   </a>
+								</button> <a href="${contextRoot}/cart/${cartLine.id}/remove"
+								class="btn btn-danger btn-sm"> <i class="fa fa-trash-o"></i>
+							</a>
 							</td>
-							
-				          </tr>
-				  </tbody>
-				  
-				  <tfoot>
+
+						</tr>
+					</c:forEach>
+				</tbody>
+
+				<tfoot>
 					<tr class="visible-xs">
 						<td class="text-center"><strong>Total &#8377;
 								${userModel.cart.grandTotal}/-</strong></td>
@@ -76,8 +81,18 @@
 								class="fa fa-angle-right"></i>
 						</a></td>
 					</tr>
-				</tfoot>  
-				        
-		      </table>
-		
+				</tfoot>
+
+			</table>
+		</c:when>
+		<c:otherwise>
+
+			<div class="jumbotron">
+
+				<h3 class="text-center">Your Cart is Empty!</h3>
+
+			</div>
+
+		</c:otherwise>
+	</c:choose>
 </div>

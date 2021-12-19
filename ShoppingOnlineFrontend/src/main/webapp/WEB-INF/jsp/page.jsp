@@ -56,8 +56,6 @@
     <%@include file="./shared/sidebar.jsp" %>  
      <!-- carozol -->
     <%@include file="./shared/carozol.jsp" %>
-    <br><br>
-    
     
     
     
