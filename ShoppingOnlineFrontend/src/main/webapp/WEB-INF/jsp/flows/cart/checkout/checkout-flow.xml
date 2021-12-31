@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/webflow
+                          http://www.springframework.org/schema/webflow/spring-webflow.xsd">
+   
+         <var name="shipping" class="com.project.ShoppingOnlineBackend.model.Address" />
+          
+          <!-- view the address selection page -->
+	<view-state id="shipping" view="flows/cart/checkout/checkout-address">
+		<transition on="payment" to="id_payment" validate="false"></transition>
+	</view-state> 
+	
+	<!-- view the payment mode page -->
+	<view-state id="id_payment" view="flows/cart/checkout/checkout-payment">
+	</view-state>               
+</flow>                          

@@ -40,6 +40,9 @@ public class CartController
 						break;	
 					case "deleted":
 						mv.addObject("message", "CartLine has been successfully removed!");
+						break;
+					case "modified":
+						mv.addObject("message", "One or more items inside cart has been modified!");
 						break;	
 				}
 		}		
@@ -67,5 +70,19 @@ public class CartController
 	public String udpateCartLine(@PathVariable int cartLineId, @RequestParam("count") int count) {
 		String response = cartLineService.manageCartLine(cartLineId, count);		
 		return "redirect:/cart/show?"+response;		
+	}
+	
+	@RequestMapping("/validate")
+	public String validateCart() 
+	{
+		String response = cartLineService.validateCartLine();
+		
+		if(!response.equals("result=success"))
+		{
+			return "redirect:/cart/show?"+response;
+		}
+		else {
+			return "redirect:/cart/checkout";
+		}
 	}
 }
