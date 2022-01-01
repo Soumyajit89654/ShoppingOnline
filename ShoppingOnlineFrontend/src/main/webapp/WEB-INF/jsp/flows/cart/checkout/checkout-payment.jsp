@@ -6,28 +6,29 @@
 		<div class="col-md-6">
 
 
+			<c:forEach items="${checkoutModel.cartLines}" var="cartLine">
 				<div class="row">
 					<div class="col-xs-12">
 
 						<div>
-							<h4>cartLine.product.name</h3>
-								<h4>Quantity -cartLine.productCount</h4>
+							<h4>${cartLine.product.name}</h3>
+								<h4>Quantity -${cartLine.productCount}</h4>
 								<h4>
-									Buying Price - &#8377; cartLine.buyingPrice/-
+									Buying Price - &#8377; ${cartLine.buyingPrice}/-
 									</h5>
 						</div>
 						<hr />
 						<div class="text-right">
-							<h3>Total - &#8377; cartLine.total/-</h3>
+							<h3>Total - &#8377; ${cartLine.total}/-</h3>
 							</hr>
 						</div>
 						<hr />
 					</div>
 
 				</div>
-
+			</c:forEach>
 			<div class="text-right">
-				<h3>Grand Total - &#8377; checkoutModel.cart.grandTotal/-</h3>
+				<h3>Grand Total - &#8377; ${checkoutModel.cart.grandTotal}/-</h3>
 				</hr>
 			</div>
 
@@ -77,9 +78,9 @@
 			<ul class="nav nav-pills nav-stacked">
 				<li class="active"><a href="#"><span
 						class="badge pull-right"> &#8377;
-							checkoutModel.checkoutTotal/-</span> Final Payment</a></li>
+							${checkoutModel.checkoutTotal}/-</span> Final Payment</a></li>
 			</ul>
-			<br /> <a href="#" class="btn btn-success btn-lg btn-block"
+			<br /> <a href="${flowExecutionUrl}&_eventId_pay" class="btn btn-success btn-lg btn-block"
 				role="button">Pay</a>
 		</div>
 	</div>
