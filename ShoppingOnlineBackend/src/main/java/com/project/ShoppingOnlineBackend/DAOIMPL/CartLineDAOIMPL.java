@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.project.ShoppingOnlineBackend.DAO.CartLineDAO;
 import com.project.ShoppingOnlineBackend.model.Cart;
 import com.project.ShoppingOnlineBackend.model.Cartline;
+import com.project.ShoppingOnlineBackend.model.OrderDetails;
 
 @Repository("cartLineDAO")
 @Transactional
@@ -88,6 +89,17 @@ public class CartLineDAOIMPL implements CartLineDAO {
 		String query = "FROM Cartline WHERE cartId = :cartId AND available = :available";
 		return sessionFactory.getCurrentSession().createQuery(query, Cartline.class).setParameter("cartId", cartId)
 				.setParameter("available", true).getResultList();
+	}
+
+	public boolean addOrderDetail(OrderDetails orderDetail) {
+		
+		try {			
+			sessionFactory.getCurrentSession().persist(orderDetail);			
+			return true;
+		}
+		catch(Exception ex) {
+			return false;
+		}
 	}
 
 }
