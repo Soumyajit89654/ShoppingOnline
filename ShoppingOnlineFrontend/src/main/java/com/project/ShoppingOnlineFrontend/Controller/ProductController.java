@@ -48,6 +48,8 @@ public class ProductController {
 		ModelAndView mv = new ModelAndView("singleproduct");
 
 		Product product = productDAO.getProduct(id);
+		product.setViews(product.getViews() + 1);
+		productDAO.updateProduct(product);
 
 		mv.addObject("title", product.getName());
 		mv.addObject("product", product);

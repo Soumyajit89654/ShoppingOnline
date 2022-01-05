@@ -34,5 +34,14 @@ public class JsonController {
 	public List<Product> getAllProducts(){
 	return productDAO.productList();	
 	}
-	
+	@RequestMapping("/product/ps/products")
+	@ResponseBody
+	public List<Product> getProductsByParamP() {
+		return productDAO.getProductsByParam("purchases",3);
+	}
+	@RequestMapping("/product/vs/products")
+	@ResponseBody
+	public List<Product> getProductsByParamV() {
+		return productDAO.getProductsByParam("views",3);
+	}
 } 
