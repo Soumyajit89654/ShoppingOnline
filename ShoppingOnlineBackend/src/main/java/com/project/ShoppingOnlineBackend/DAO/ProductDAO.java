@@ -15,4 +15,5 @@ public interface ProductDAO
 	boolean deleteProduct(Product product);
 	List<Product> listActiveProducts();	
 	List<Product> listActiveProductsByCategory(int categoryId);
+	List<Product> getProductsByParam(String param, int count);
 }
